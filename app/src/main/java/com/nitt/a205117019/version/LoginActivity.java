@@ -20,16 +20,22 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    EditText _emailText = (EditText)findViewById((R.id.input_email));
-    EditText _passwordText = (EditText)findViewById(R.id.input_password);
-    Button _loginButton = (Button)findViewById((R.id.btn_login));
-    TextView _signupLink = (TextView)findViewById(R.id.link_signup);
+   EditText _emailText;
+   EditText _passwordText;
+   Button _loginButton ;
+   TextView _signupLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        _loginButton.setOnClickListener(new View.OnClickListener() {
+
+        _emailText = (EditText)findViewById((R.id.input_email));
+        _passwordText = (EditText)findViewById(R.id.input_password);
+        _loginButton = (Button)findViewById((R.id.btn_login));
+        _signupLink = (TextView)findViewById(R.id.link_signup);
+
+       _loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
@@ -48,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        /*final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 0);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
@@ -57,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -69,13 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 },3000);
 
-*/
+
 
     }
 
-    //@Override
+    @Override
 
-   /* protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
 
@@ -84,13 +90,13 @@ public class LoginActivity extends AppCompatActivity {
                 this.finish();
             }
         }
-    }*/
+    }
 
-    /*@Override
+    @Override
     public void onBackPressed() {
         // disable going back to the MainActivity
         moveTaskToBack(true);
-    }*/
+    }
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
@@ -111,8 +117,8 @@ public class LoginActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if(user_password.isEmpty() || user_password.length()>4 || user_password.length()<12){
-            _passwordText.setError("enter a valid email address");
+        if(user_password.isEmpty() || !(user_password.length()>4 || user_password.length()<12)){
+            _passwordText.setError("Passwor is small");
             valid = false;
         }else{
             _passwordText.setError(null);
@@ -125,4 +131,5 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getBaseContext(),"Login failed",Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
+
 }
