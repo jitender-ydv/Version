@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if(user_password.isEmpty() || !(user_password.length()>4 || user_password.length()<12)){
-            _passwordText.setError("Passwor is small");
+            _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         }else{
             _passwordText.setError(null);
